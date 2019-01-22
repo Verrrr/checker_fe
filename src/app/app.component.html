@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<div class="ui container">
+    <div class="ui secondary  menu" *ngIf="auth.isLogIn()">
+        <a class="item" routerLink="/home" routerLinkActive="active">
+            Home
+        </a>
+        <a class="item" routerLink="/manage" routerLinkActive="active" *ngIf="auth.isAdmin()">
+            Manage
+        </a>
+        <div class="right menu">
+            <button (click)="logout()" class="ui item">Logout</button>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

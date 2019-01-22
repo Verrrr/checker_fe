@@ -1,0 +1,90 @@
+<div class="ui grid">
+    <div class="five wide column">
+      <h1 class="ui header">Problems</h1>
+      <div class="ui vertical menu fluid" *ngIf="!!problems?.length">
+        <a class="item" 
+        [ngClass]="{'active': p == selectedProblem}" 
+        *ngFor="let p of problems"
+        (click)="select(p)"
+        >
+        <div class="ui basic segment" style="padding: 0! important">
+          <h3 class="ui header" style="display: inline">{{ p.title }}</h3>
+          <button (click)="deleteProblem(p)" class="ui basic red tiny circular right floated icon button">
+            <i class="ui delete icon"></i>
+          </button>
+        </div>
+        </a>
+      </div>
+      <div class="ui grid">
+        <div class="ten wide column">
+          <div class="ui input fluid">
+            <input type="text" placeholder="title" #addProblemInput (keydown.enter)="addProblem(addProblemInput)">
+          </div>
+        </div>
+        <div class="six wide column">
+          <button class="ui button green" [ngClass]="{'loading': addButtonLoading}" (click)="addProblem(addProblemInput)">
+            <i class="ui add icon"></i>
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="eleven wide stretched column">
+      <div class="ui segment" *ngIf="!!selectedProblem; else noSelected">
+
+        <div class="ui input"  (dblclick)="showEditTitle=!showEditTitle" *ngIf="showEditTitle">
+          <input type="text" 
+          (keydown.enter)="updateProblem({title: editTitle.value});showEditTitle=!showEditTitle" 
+          autofocus #editTitle [value]="selectedProblem.title">
+        </div>
+        <h1 class="ui header" (dblclick)="showEditTitle=!showEditTitle" *ngIf="!showEditTitle">{{ selectedProblem.title }}</h1>
+        <p style="white-space: pre-line;" (dblclick)="showEditExplain=!showEditExplain" *ngIf="!showEditExplain">{{ selectedProblem?.explanation }}</p>
+        <div class="ui form field" *ngIf="showEditExplain || !selectedProblem?.explanation">
+          <textarea rows="10" 
+          #problemExplain 
+          (keydown.enter)="updateProblem({explanation: problemExplain.value}); showEditExplain = false;"
+          [value] = "selectedProblem?.explanation"
+          ></textarea>
+        </div>
+        <h3 class="ui header">Sample Inputs</h3>
+        <div class="ui segment" *ngFor="let s of sampleCases">
+          <h5 class="ui header">Input</h5>
+          <p>{{ s.input }}</p>
+          <h5 class="ui header">Output</h5>
+          <p>{{ s.output }}</p>
+        </div>
+        <button class="ui button green" (click)="createSample({problem_id: selectedProblem.problem_id})">Add input</button>
+      </div>
+      <ng-template #noSelected>
+        <div class="ui segment center aligned" style="height: 500px">
+          <h1 class="ui header">No Problem Selected</h1>
+        </div>
+      </ng-template>
+      <h1 class="ui header">Test Cases</h1>
+      <div class="ui grid">
+        <div class="four wide column">
+          <div class="ui vertical pointing menu">
+            <a class="item">
+              Case 1
+            </a>
+            <a class="item">
+              Case 2
+            </a>
+            <a class="item active">
+              Case 3
+            </a>
+          </div>
+        </div>
+        <div class="twelve wide column">
+          <div class="ui segment red">
+            <h4 class="ui header">Input</h4>
+            <p>1</p>
+            <h4 class="ui header">Ouput</h4>
+            <p>2</p>
+            <h4 class="ui header">Your output</h4>
+            <p>213109283019823</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

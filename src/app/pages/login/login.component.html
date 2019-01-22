@@ -9,7 +9,7 @@
         <div class="field">
           <label>Username</label>
           <div class="ui icon input">
-            <input type="text" required ngModel name="username">
+            <input type="text" required ngModel name="username" autocomplete="off" spellcheck="off">
             <i class="user icon"></i>
           </div>
         </div>
@@ -24,6 +24,12 @@
           <button #submitBtn [disabled]="!f.valid" type="submit" class="ui primary button">Login</button>
         </div>
       </form>
+      <div *ngIf="hasError" class="ui bottom attached negative message">
+        <div class="header">
+          Error!  
+        </div>
+        <p>Invalid credentials</p>
+      </div>
     </div>
   </div>
 </div>
