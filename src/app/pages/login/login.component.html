@@ -1,0 +1,29 @@
+<div class="ui three column centered grid" style="padding-top: 10em">
+  <div class="column">
+    <div class="ui segment">
+      <form #f="ngForm" [ngClass]="{'loading': isFormLoading}" (ngSubmit)="onSubmit(f)" class="ui form">
+        <div class="ui center aligned icon header">
+          <i class="circular user icon"></i>
+          Login
+        </div>
+        <div class="field">
+          <label>Username</label>
+          <div class="ui icon input">
+            <input type="text" required ngModel name="username">
+            <i class="user icon"></i>
+          </div>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <div class="ui icon input">
+            <input type="password" required ngModel name="password" (keydown.enter)="submitBtn.click()">
+            <i class="key icon"></i>
+          </div>
+        </div>
+        <div class="ui right aligned basic segment">
+          <button #submitBtn [disabled]="!f.valid" type="submit" class="ui primary button">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

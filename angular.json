@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/semantic/semantic.min.css",
               "src/styles.css"
             ],
             "scripts": []
