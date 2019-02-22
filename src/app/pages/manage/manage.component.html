@@ -30,60 +30,30 @@
       </div>
     </div>
     <div class="eleven wide stretched column">
-      <div class="ui segment" *ngIf="!!selectedProblem; else noSelected">
 
-        <div class="ui input"  (dblclick)="showEditTitle=!showEditTitle" *ngIf="showEditTitle">
-          <input type="text" 
-          (keydown.enter)="updateProblem({title: editTitle.value});showEditTitle=!showEditTitle" 
-          autofocus #editTitle [value]="selectedProblem.title">
+      <div class="ui basic segment">
+        <div class="ui secondary pointing menu">
+          <a class="active item">
+            Context
+          </a>
+          <a class="item">
+            Sample Inputs
+          </a>
+          <a class="item">
+            Test Cases
+          </a>
         </div>
-        <h1 class="ui header" (dblclick)="showEditTitle=!showEditTitle" *ngIf="!showEditTitle">{{ selectedProblem.title }}</h1>
-        <p style="white-space: pre-line;" (dblclick)="showEditExplain=!showEditExplain" *ngIf="!showEditExplain">{{ selectedProblem?.explanation }}</p>
-        <div class="ui form field" *ngIf="showEditExplain || !selectedProblem?.explanation">
-          <textarea rows="10" 
-          #problemExplain 
-          (keydown.enter)="updateProblem({explanation: problemExplain.value}); showEditExplain = false;"
-          [value] = "selectedProblem?.explanation"
-          ></textarea>
-        </div>
-        <h3 class="ui header">Sample Inputs</h3>
-        <div class="ui segment" *ngFor="let s of sampleCases">
-          <h5 class="ui header">Input</h5>
-          <p>{{ s.input }}</p>
-          <h5 class="ui header">Output</h5>
-          <p>{{ s.output }}</p>
-        </div>
-        <button class="ui button green" (click)="createSample({problem_id: selectedProblem.problem_id})">Add input</button>
-      </div>
-      <ng-template #noSelected>
-        <div class="ui segment center aligned" style="height: 500px">
-          <h1 class="ui header">No Problem Selected</h1>
-        </div>
-      </ng-template>
-      <h1 class="ui header">Test Cases</h1>
-      <div class="ui grid">
-        <div class="four wide column">
-          <div class="ui vertical pointing menu">
-            <a class="item">
-              Case 1
-            </a>
-            <a class="item">
-              Case 2
-            </a>
-            <a class="item active">
-              Case 3
-            </a>
-          </div>
-        </div>
-        <div class="twelve wide column">
-          <div class="ui segment red">
-            <h4 class="ui header">Input</h4>
-            <p>1</p>
-            <h4 class="ui header">Ouput</h4>
-            <p>2</p>
-            <h4 class="ui header">Your output</h4>
-            <p>213109283019823</p>
-          </div>
+        <div class="ui segment">
+          <form class="ui form">
+            <div class="field">
+              <label>Title</label>
+              <input autocomplete="off" spellcheck="false" placeholder="Title">
+            </div>
+            <div class="field">
+              <label>Problem</label>
+              <textarea rows="20"></textarea>
+            </div>
+          </form>
         </div>
       </div>
     </div>
